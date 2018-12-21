@@ -19,10 +19,10 @@ public class DoctorController {
 
     @RequestMapping("/getDoctors")
     @ResponseBody
-    public String getDoctors(HttpServletRequest request){
+    public String getDoctors(HttpServletRequest request) {
         String params = request.getParameter("params");
-          Map<String, Object> map = JSON.parseObject(params);
-        if(map==null)
+        Map<String, Object> map = JSON.parseObject(params);
+        if (map == null)
             map = new HashMap<>();
         String doctors = doctorService.getDoctors(map);
         return doctors;
@@ -30,17 +30,34 @@ public class DoctorController {
 
     @RequestMapping("/getDoctorsNum")
     @ResponseBody
-    public int getDoctorsNum(){
+    public int getDoctorsNum() {
         int res = doctorService.getDoctorsNum();
         return res;
     }
 
     @RequestMapping("/addDoctor")
     @ResponseBody
-    public String addDoctors(HttpServletRequest request){
+    public String addDoctors(HttpServletRequest request) {
         String params = request.getParameter("doctor");
         Map<String, Object> map = JSON.parseObject(params);
         String res = doctorService.addDoctor(map);
+        return res;
+    }
+
+    @RequestMapping("/updateDoctor")
+    @ResponseBody
+    public String updateDoctors(HttpServletRequest request) {
+        String params = request.getParameter("doctor");
+        Map<String, Object> map = JSON.parseObject(params);
+        String res = doctorService.updateDoctor(map);
+        return res;
+    }
+
+    @RequestMapping("/deleteDoctor")
+    @ResponseBody
+    public String deleteDoctors(HttpServletRequest request) {
+        String id = request.getParameter("doctorId");
+        String res = doctorService.deleteDoctor(Integer.parseInt(id));
         return res;
     }
 }

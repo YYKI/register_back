@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import top.yyki.dao.DepartmentDao;
 import top.yyki.dao.DoctorsDao;
-import top.yyki.model.Doctor;
 
 import java.util.List;
 import java.util.Map;
@@ -42,23 +41,39 @@ public class DoctorService {
 
     }
 
-    public void doctorsFilter(List<Map<String, Object>> doctors){
-        for(Map<String, Object> doctor : doctors){
+    public void doctorsFilter(List<Map<String, Object>> doctors) {
+        for (Map<String, Object> doctor : doctors) {
             int departmentId = (int) doctor.get("department_id");
             String department = departmentDao.getDepartmentById(departmentId);
             doctor.put("department", department);
         }
     }
 
-    public String addDoctor(Map<String, Object> doctor){
+    public String addDoctor(Map<String, Object> doctor) {
         int res = doctorsDao.addDoctor(doctor);
-        if(res>0){
+        if (res > 0) {
             return "ok";
         }
         return "error";
     }
 
-    public int getDoctorsNum(){
+    public String updateDoctor(Map<String, Object> doctor) {
+        int res = doctorsDao.updateDoctor(doctor);
+        if (res > 0) {
+            return "ok";
+        }
+        return "error";
+    }
+
+    public String deleteDoctor(int id) {
+        int res = doctorsDao.deleteDoctor(id);
+        if (res > 0) {
+            return "ok";
+        }
+        return "error";
+    }
+
+    public int getDoctorsNum() {
         int num = doctorsDao.getdoctorsNum();
         return num;
     }
