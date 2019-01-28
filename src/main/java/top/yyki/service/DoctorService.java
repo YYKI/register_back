@@ -38,7 +38,6 @@ public class DoctorService {
         doctorsFilter(doctors);
         String res = JSON.toJSONString(doctors);
         return res;
-
     }
 
     public void doctorsFilter(List<Map<String, Object>> doctors) {

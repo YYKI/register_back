@@ -6,13 +6,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import top.yyki.service.AuthService;
 import top.yyki.service.UserService;
+
+import java.util.Map;
 
 @RestController
 public class UserController {
 
     @Autowired
     UserService userService;
+    @Autowired
+    AuthService authService;
 
     @RequestMapping("/get")
     @ResponseBody
@@ -23,11 +28,8 @@ public class UserController {
 
     @RequestMapping("/verify")
     @ResponseBody
-    public String verify(@RequestParam String username, @RequestParam String password){
-        boolean valid = userService.isUserValid(username, password);
-        if(valid){
-            return "success";
-        }
-        return "fail";
+    public Map<String, String> verify(@RequestParam String username, @RequestParam String password){
+        Map<String, String> res = userService.isUserValid(username, password);
+        return res;
     }
 }

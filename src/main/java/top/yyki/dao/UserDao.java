@@ -11,5 +11,5 @@ import java.util.Map;
 public interface UserDao {
 
     @Select("select * from user where username= #{username}")
-    List<Map<String, String>> getUser(String username);
+    List<Map<String, Object>> getUser(String username);
 }
